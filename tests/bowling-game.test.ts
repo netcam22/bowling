@@ -81,7 +81,7 @@ describe("test for number values including one or more non consecutive strikes f
     expect(totalScore("X 54 X 54 X 54 X 54 X 54")).toBe(140);
   });
 });
-/*
+
 describe("test for number values including two or more consecutive strikes from games with 10 turns", () => {
   test("scores of 5,4 with two consecutive strike scores to be 146", () => {
     expect(totalScore("54 X X 54 X 54 X 54 X 54")).toBe(146);
@@ -91,4 +91,3 @@ describe("test for number values including two or more consecutive strikes from 
     expect(totalScore("X0 X0 X0 X0 X0 X0 X0 X0 X0 54")).toBe(263);
   });
 });
-*/
