@@ -1,6 +1,4 @@
 export function totalScore(scoreString: string): number {
-  ///"11 11 11 11 11 11 11 11 11 11"
-  // split
   const scoreArr = scoreString.split(" ");
   //console.log(scoreArr);
   // map
@@ -15,13 +13,19 @@ export function totalScore(scoreString: string): number {
       const [a, b] = [parseInt(turnInNums[0]), parseInt(turnInNums[1])];
       // consider prev score as x, y
       // for spare, y = 10-x plus a from current score
-      if (i > 0 && scoreArray[i - 1].includes("/")) {
+      if (
+        i > 0 &&
+        (scoreArray[i - 1].includes("/") || scoreArray[i - 1].includes("X"))
+      ) {
+        let [x, y] = [a, b];
         const prevScore = scoreArray[i - 1];
         //console.log(prevScore);
-        const [x, y] = [
-          parseInt(prevScore[0]),
-          10 - parseInt(prevScore[0]) + a
-        ];
+        if (scoreArray[i - 1].includes("/")) {
+          [x, y] = [parseInt(prevScore[0]), 10 - parseInt(prevScore[0]) + a];
+        }
+        if (scoreArray[i - 1].includes("X")) {
+          [x, y] = [10, a + b];
+        }
         console.log(a, b, x, y);
         const newArr = [...numArray];
         newArr[i] = [a, b];

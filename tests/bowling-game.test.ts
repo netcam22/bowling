@@ -51,4 +51,11 @@ describe("test for number values with some misses from throws with 10 turns", ()
   test("test for all turns with scores of 5,4 but one with spare score of 5,/", () => {
     expect(totalScore(scoreString)).toBe(score);
   });
+  test("throws of all 5s and spares apart from last turn", () => {
+    expect(totalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 54")).toBe(144);
+  });
+
+  test(" mixed throws with 2 spares result in score of 92", () => {
+    expect(totalScore("5/ 54 53 51 54 53 51 52 5/ 54")).toBe(92);
+  });
 });
