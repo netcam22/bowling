@@ -43,7 +43,7 @@ describe("test for number values with some misses from throws with 10 turns", ()
   });
 });
 
-describe("test for number values with some misses from throws with 10 turns", () => {
+describe("test for number values with some spares from throws with 10 turns", () => {
   // arrange
   const scoreString = "54 54 54 5/ 54 54 54 54 54 54";
   const score = 96;
@@ -59,3 +59,36 @@ describe("test for number values with some misses from throws with 10 turns", ()
     expect(totalScore("5/ 54 53 51 54 53 51 52 5/ 54")).toBe(92);
   });
 });
+
+describe("test for number values including one or more non consecutive strikes from games with 10 turns", () => {
+  // arrange
+  const scoreString = "54 54 54 X 54 54 54 54 54 54";
+  const score = 100;
+  // act and assert
+  test("all turns with scores of 5,4 apart from one strike scores 100", () => {
+    expect(totalScore(scoreString)).toBe(score);
+  });
+
+  test("all turns with scores of 5,4 apart from two non consecutive strike scores 110", () => {
+    expect(totalScore("54 54 X 54 54 54 X 54 54 54")).toBe(110);
+  });
+
+  test("all turns with scores of 5,4 apart from three non consecutive strike scores 120", () => {
+    expect(totalScore("54 54 X 54 X 54 X 54 54 54")).toBe(120);
+  });
+
+  test("alternate scores of 5,4 with strike scores 140", () => {
+    expect(totalScore("X 54 X 54 X 54 X 54 X 54")).toBe(140);
+  });
+});
+/*
+describe("test for number values including two or more consecutive strikes from games with 10 turns", () => {
+  test("scores of 5,4 with two consecutive strike scores to be 146", () => {
+    expect(totalScore("54 X X 54 X 54 X 54 X 54")).toBe(146);
+  });
+
+  test("throws of all strikes apart from last turn to be 263", () => {
+    expect(totalScore("X0 X0 X0 X0 X0 X0 X0 X0 X0 54")).toBe(263);
+  });
+});
+*/
