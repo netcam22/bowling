@@ -4,8 +4,9 @@ export function totalScore(scoreString: string): number {
   const scoreArr = scoreString.split(" ");
   console.log(scoreArr);
   // map
-  const mappedScore = scoreArr.map(item => {
-    return [parseInt(item[0]), parseInt(item[1])];
+  const mappedScore = scoreArr.map((turn: string): Array<number> => {
+    const turnInNums = turn.replace("-", "0");
+    return [parseInt(turnInNums[0]), parseInt(turnInNums[1])];
   });
   console.log(mappedScore);
   // reduce

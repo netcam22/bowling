@@ -22,3 +22,13 @@ describe("test for only number values from throws with 10 turns", () => {
     expect(totalScore("81 81 81 81 81 81 81 81 81 81")).toBe(90);
   });
 });
+
+describe("test for only number values from throws with 10 turns", () => {
+  // arrange
+  const scoreString = "11 11 11 11 1- 11 11 11 11 11";
+  const score = 19;
+  // act and assert
+  test("all throws of one apart from one miss result in score of 19", () => {
+    expect(totalScore(scoreString)).toBe(score);
+  });
+});
