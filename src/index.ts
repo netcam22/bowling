@@ -1,2 +1,1 @@
-import { add } from "./calc";
-console.log(add(2, 2));
+import { totalScore } from "./bowling-game";
