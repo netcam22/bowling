@@ -42,3 +42,13 @@ describe("test for number values with some misses from throws with 10 turns", ()
     expect(totalScore("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-")).toBe(90);
   });
 });
+
+describe("test for number values with some misses from throws with 10 turns", () => {
+  // arrange
+  const scoreString = "54 54 54 5/ 54 54 54 54 54 54";
+  const score = 96;
+  // act and assert
+  test("test for all turns with scores of 5,4 but one with spare score of 5,/", () => {
+    expect(totalScore(scoreString)).toBe(score);
+  });
+});
