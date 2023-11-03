@@ -17,7 +17,7 @@ export function totalScore(scoreString: string): number {
         };
         let [a, b] = makeSubArr(scoreArray[i - 2]);
         const [c, d] = makeSubArr(scoreArray[i - 1]);
-        const [e, f] = makeSubArr(thisTurn);
+        let [e, f, ...bonus] = makeSubArr(thisTurn);
         if (
           scoreArray[i - 2].includes("/") ||
           scoreArray[i - 2].includes("X")
@@ -33,8 +33,24 @@ export function totalScore(scoreString: string): number {
             [a, b] = [a + b + c + d, 0];
           }
         }
+
         const newArr = [...numArray];
-        newArr[i - 2] = [a, b];
+        if (
+          (i === scoreArray.length - 3 && thisTurn.includes("/")) ||
+          thisTurn.includes("X")
+        ) {
+          let [x, y] = [...bonus];
+          if (x === undefined) {
+            x = 0;
+          }
+          if (y === undefined) {
+            y = 0;
+          }
+          console.log(x, y);
+          newArr[i - 2] = [a + x + y, b];
+        } else {
+          newArr[i - 2] = [a, b];
+        }
         return newArr;
       }
       return numArray;
@@ -44,9 +60,9 @@ export function totalScore(scoreString: string): number {
       [0, 0]
     ]
   );
-  console.log(scoreString, scoreArr);
+  //console.log(scoreString, scoreArr);
   return scoreArr.reduce((acc, turn) => {
-    console.log(turn[0], turn[1], acc);
+    //console.log(turn[0], turn[1], acc);
     return (acc += turn[0] + turn[1]);
   }, 0);
 }

@@ -88,6 +88,42 @@ describe("test for number values including two or more consecutive strikes from 
   });
 
   test("throws of all strikes apart from last turn to be 263", () => {
-    expect(totalScore("X0 X0 X0 X0 X0 X0 X0 X0 X0 54")).toBe(263);
+    expect(totalScore("X X X X X X X X X 54")).toBe(263);
+  });
+
+  test("throws of multiple strikes apart from last turn to be 157", () => {
+    expect(totalScore("X X 81 X 71 X X 34 X 54")).toBe(157);
+  });
+
+  test("throws of multiple strikes apart from last turn to be 153", () => {
+    expect(totalScore("45 X X 27 X X 35 X X 16")).toBe(153);
+  });
+});
+
+describe("test for values with spare at end", () => {
+  // arrange
+  const scoreString = "54 54 54 5/ 54 54 54 54 54 5/5";
+  const score = 102;
+  // act and assert
+  test("test for spare at end", () => {
+    expect(totalScore(scoreString)).toBe(score);
+  });
+
+  test("test for multiples spares with spare at end", () => {
+    expect(totalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5")).toBe(150);
+  });
+});
+
+describe("test for values with strikes at end", () => {
+  // arrange
+  const scoreString = "54 54 54 54 54 54 54 54 54 X25";
+  const score = 98;
+  // act and assert
+  test("test for strike at end", () => {
+    expect(totalScore(scoreString)).toBe(score);
+  });
+
+  test("test for multiples spares with spare at end", () => {
+    expect(totalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ X45")).toBe(159);
   });
 });
