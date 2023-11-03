@@ -18,7 +18,7 @@ describe("test for only number values from throws with 10 turns", () => {
   test("throws of all positive integer values result in score of 65", () => {
     expect(totalScore("23 52 45 13 42 33 54 12 34 54")).toBe(65);
   });
-  test("throws of all 8s and 1s result in score of 180", () => {
+  test("throws of all 8s and 1s result in score of 90", () => {
     expect(totalScore("81 81 81 81 81 81 81 81 81 81")).toBe(90);
   });
 });
