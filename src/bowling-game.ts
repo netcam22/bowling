@@ -32,15 +32,15 @@ export function totalScore(scoreString: string): number {
           [c, d] = makeSubArr(next),
           [e, f] = makeSubArr(oneAfter);
         if (current.includes("/") || current.includes("X")) {
-          if (current.includes("/")) {
-            [a, b] = [a, b - a + c];
-          } else if (current.includes("X") && next.includes("X")) {
-            [a, b] = [a + b + c + d + e, 0];
-          } else if (current.includes("X") && next.includes("/")) {
-            [a, b] = [a + b + d, 0];
-          } else if (current.includes("X")) {
-            [a, b] = [a + b + c + d, 0];
-          }
+          [a, b] = current.includes("/")
+            ? [a, b - a + c]
+            : current.includes("X") && next.includes("X")
+            ? [a + b + c + d + e, 0]
+            : current.includes("X") && next.includes("/")
+            ? [a + b + d, 0]
+            : current.includes("X")
+            ? [a + b + c + d, 0]
+            : [a, b];
           if (i === scoreArray.length - 1) {
             const [x, y] = [...bonus];
             return count + a + (x | 0) + (y | 0) + b;
