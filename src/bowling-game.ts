@@ -9,49 +9,44 @@ export function totalScore(scoreString: string): number {
         scoreArray: Array<string>
       ): number => {
         const makeSubArr = (scoreStr: string | undefined): Array<number> => {
-          if (scoreStr !== undefined) {
+          if (scoreStr) {
             return scoreStr
               .replace(/^X{1}$/, "X0")
               .split("")
-              .map((char: string) =>
+              .map((char: string, i: number) =>
                 !isNaN(parseInt(char))
                   ? parseInt(char)
-                  : char === "X"
+                  : char.match(/^\/{1}$/)
                   ? 10
-                  : char === "XX"
-                  ? 20
+                  : char.match(/^X{1,3}$/)
+                  ? 10 * char.length
                   : 0
               );
           }
           return [0, 0];
         };
-        let [a, b] = makeSubArr(scoreArray[i]);
-        const [c, d] = makeSubArr(scoreArray[i + 1]);
-        const [e, f, ...bonus] = makeSubArr(scoreArray[i + 2]);
-        if (scoreArray[i].includes("/") || scoreArray[i].includes("X")) {
-          if (scoreArray[i].includes("/")) {
-            [a, b] = [a, 10 - a + c];
-          } else if (
-            scoreArray[i + 1] !== undefined &&
-            scoreArray[i + 1].includes("X") &&
-            scoreArray[i].includes("X")
-          ) {
+        let [a, b, ...bonus] = makeSubArr(thisTurn);
+        const current = thisTurn.slice(0, 2),
+          next = scoreArray[i + 1] ? scoreArray[i + 1].slice(0, 2) : "00",
+          oneAfter = scoreArray[i + 2] ? scoreArray[i + 2].slice(0, 2) : "00",
+          [c, d] = makeSubArr(next),
+          [e, f] = makeSubArr(oneAfter);
+        if (current.includes("/") || current.includes("X")) {
+          if (current.includes("/")) {
+            [a, b] = [a, b - a + c];
+          } else if (current.includes("X") && next.includes("X")) {
             [a, b] = [a + b + c + d + e, 0];
-          } else if (scoreArray[i].includes("X")) {
+          } else if (current.includes("X") && next.includes("/")) {
+            [a, b] = [a + b + d, 0];
+          } else if (current.includes("X")) {
             [a, b] = [a + b + c + d, 0];
           }
+          if (i === scoreArray.length - 1) {
+            const [x, y] = [...bonus];
+            return count + a + (x | 0) + (y | 0) + b;
+          }
         }
-        if (
-          scoreArray[i + 2] !== undefined &&
-          (scoreArray[i + 2].includes("/") || scoreArray[i + 2].includes("X"))
-        ) {
-          let [x, y] = [...bonus];
-          console.log(bonus);
-          count += a + (x | 0) + (y | 0) + b;
-        } else {
-          count += a + b;
-        }
-        return count;
+        return count + a + b;
       },
       0
     );

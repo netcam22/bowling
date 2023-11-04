@@ -123,11 +123,23 @@ describe("test for values with strikes at end", () => {
     expect(totalScore(scoreString)).toBe(score);
   });
 
-  test("test for multiples spares with spare at end", () => {
+  test("test for multiples spares with strike at end", () => {
     expect(totalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ X45")).toBe(159);
   });
 
-  test("test for multiples spares with spare at end", () => {
+  test("test with strike and number at end", () => {
     expect(totalScore("44 9/ 25 08 71 80 54 2/ X XX1")).toBe(131);
+  });
+
+  test("test with strike at start", () => {
+    expect(totalScore("X 9/ 80 63 09 9/ 23 72 45 12")).toBe(102);
+  });
+
+  test("test with strikes and spares", () => {
+    expect(totalScore("9/ 5/ X 0/ 5/ X 6/ 9/ X 12")).toBe(165);
+  });
+
+  test("test with strikes and spares", () => {
+    expect(totalScore("8/ 32 X 5/ 52 52 4/ 71 X 1/X")).toBe(132);
   });
 });
