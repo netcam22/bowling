@@ -126,4 +126,8 @@ describe("test for values with strikes at end", () => {
   test("test for multiples spares with spare at end", () => {
     expect(totalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ X45")).toBe(159);
   });
+
+  test("test for multiples spares with spare at end", () => {
+    expect(totalScore("44 9/ 25 08 71 80 54 2/ X XX1")).toBe(131);
+  });
 });
